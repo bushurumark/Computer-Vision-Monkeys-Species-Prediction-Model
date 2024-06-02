@@ -53,7 +53,8 @@ species_names = [
 
 # Define a function to preprocess the image
 def preprocess_image(image):
-    image = image.resize((224, 224))  # Adjust size to match model input
+    image = image.resize((64, 64))  # Adjust size to match model input (64x64)
+    image = image.convert("RGB")  # Ensure image is in RGB mode
     image = np.array(image)
     image = np.expand_dims(image, axis=0)  # Add batch dimension
     image = image / 255.0  # Normalize
@@ -116,6 +117,7 @@ if uploaded_file is not None:
     
     # Display the prediction
     st.markdown(f'<div class="prediction">Prediction: {predicted_species}</div>', unsafe_allow_html=True)
+
 
 
 # In[ ]:
