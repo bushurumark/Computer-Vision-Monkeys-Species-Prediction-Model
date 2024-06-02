@@ -10,13 +10,33 @@
 # In[2]:
 
 
+#!pip install gdown
+
+
+# In[3]:
+
+
 import streamlit as st
 import tensorflow as tf
 from PIL import Image
 import numpy as np
 
 # Load the model
-model = tf.keras.models.load_model('model.h5')
+model = tf.keras.models.load_model("model.h5")
+
+# Define the species names
+species_names = [
+    "Mantled Howler",
+    "Patas Monkey",
+    "Bald Monkey",
+    "Japanese Macaque",
+    "Pygmy Marmoset",
+    "White Headed Capuchin",
+    "Silver Marmoset",
+    "Common Squirrel Monkey",
+    "Black Headed Night Monkey",
+    "Nilgiri Langur"
+]
 
 # Define a function to preprocess the image
 def preprocess_image(image):
@@ -71,8 +91,18 @@ if uploaded_file is not None:
     st.image(image, caption='Uploaded Image.', use_column_width=True, output_format='JPEG', channels='RGB')
     st.write("")
     st.markdown('<div class="prediction">Classifying...</div>', unsafe_allow_html=True)
+    
+    # Make prediction
     prediction = predict(image)
-    st.markdown(f'<div class="prediction">Prediction: {prediction}</div>', unsafe_allow_html=True)
+    
+    # Get the index of the highest probability
+    predicted_index = np.argmax(prediction, axis=1)[0]
+    
+    # Get the corresponding species name
+    predicted_species = species_names[predicted_index]
+    
+    # Display the prediction
+    st.markdown(f'<div class="prediction">Prediction: {predicted_species}</div>', unsafe_allow_html=True)
 
 
 # In[ ]:
