@@ -7,3 +7,5 @@ joblib
 pandas
 tensorflow
 Pillow
+gdown 
+os
