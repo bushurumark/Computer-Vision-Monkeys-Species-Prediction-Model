@@ -20,9 +20,22 @@ import streamlit as st
 import tensorflow as tf
 from PIL import Image
 import numpy as np
+import gdown
+import os
+
+# Direct download link of the model file from Google Drive
+url = 'https://drive.google.com/uc?id=1ulzwaxgv_sU4VAGIy5EuxwWzcuvuRohn'
+
+# Path to save the downloaded model file
+model_path = 'model.h5'
+
+# Download the model if it does not exist
+if not os.path.exists(model_path):
+    with st.spinner('Downloading model...'):
+        gdown.download(url, model_path, quiet=False)
 
 # Load the model
-model = tf.keras.models.load_model("model.h5")
+model = tf.keras.models.load_model(model_path)
 
 # Define the species names
 species_names = [
