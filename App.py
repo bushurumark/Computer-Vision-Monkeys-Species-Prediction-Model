@@ -70,10 +70,10 @@ def predict(image):
 st.markdown("""
     <style>
     body {
-        background-color: #f0f2f6;
+        background-color: violet;
     }
     .title {
-        color: #333;
+        color: red;
         font-family: 'Arial';
         text-align: center;
     }
